@@ -1,0 +1,3 @@
+The FA has to have on the first line the set of states and on the second line the alphabet.
+The set of final states is located on the line which starts with 'F='.
+The transitions are triples delimited by comma.
