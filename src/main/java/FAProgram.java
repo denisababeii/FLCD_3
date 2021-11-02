@@ -14,7 +14,7 @@ public class FAProgram {
         finalStates = new ArrayList<>();
         transitions = new ArrayList<>();
     }
-    public void getElements(String file) {
+    private void getElements(String file) {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(file));
@@ -48,5 +48,53 @@ public class FAProgram {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void printElements() {
+        // print states
+        StringBuilder states = new StringBuilder();
+        for (var state:
+             statesSet) {
+            states.append(state+", ");
+        }
+        states.delete(states.length()-2,states.length());
+        System.out.println("Q={"+states.toString()+"}");
+
+        // print initial state
+        System.out.println("q0="+statesSet.get(0).toString());
+
+        // print alphabet
+        StringBuilder tempAlphabet = new StringBuilder();
+        for (var item:
+                alphabet) {
+            tempAlphabet.append(item+", ");
+        }
+        tempAlphabet.delete(tempAlphabet.length()-2,tempAlphabet.length());
+        System.out.println("Sigma={"+tempAlphabet.toString()+"}");
+
+        // print transitions
+
+        StringBuilder tempTransitions = new StringBuilder();
+        for (var element:
+             transitions) {
+            var triple = element.split(",");
+            tempTransitions.append("Delta("+triple[0]+","+triple[1]+")="+triple[2]+"\n");
+        }
+        System.out.print(tempTransitions);
+
+        // print final states
+        StringBuilder tempFinalStates = new StringBuilder();
+        for (var finalState:
+                finalStates) {
+            tempFinalStates.append(finalState+", ");
+        }
+        tempFinalStates.delete(tempFinalStates.length()-2,tempFinalStates.length());
+        System.out.println("F={"+tempFinalStates.toString()+"}");
+
+    }
+
+    public void run(String file) {
+        getElements(file);
+        printElements();
     }
 }
