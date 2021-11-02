@@ -14,7 +14,7 @@ public class FAProgram {
         finalStates = new ArrayList<>();
         transitions = new ArrayList<>();
     }
-    private void getElements(String file) {
+    private void getElements(String file) throws Exception {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(file));
@@ -38,6 +38,8 @@ public class FAProgram {
                 }
 
                 else {
+                    if(transitions.contains(line))
+                        throw new Exception("Duplicate transition!");
                     transitions.add(line);
                 }
 
@@ -93,7 +95,7 @@ public class FAProgram {
 
     }
 
-    public void run(String file) {
+    public void run(String file) throws Exception {
         getElements(file);
         printElements();
     }
