@@ -6,13 +6,13 @@ public class FAProgram {
     ArrayList<String> statesSet;
     ArrayList<String> alphabet;
     ArrayList<String> finalStates;
-    ArrayList<String> transitions;
+    ArrayList<Triple> transitions;
 
     public FAProgram() {
         statesSet = new ArrayList<>();
         alphabet = new ArrayList<>();
         finalStates = new ArrayList<>();
-        transitions = new ArrayList<>();
+        transitions = new ArrayList<>(); // !
     }
     private void getElements(String file) throws Exception {
         BufferedReader reader;
@@ -40,7 +40,9 @@ public class FAProgram {
                 else {
                     if(transitions.contains(line))
                         throw new Exception("Duplicate transition!");
-                    transitions.add(line);
+                    var tempTransitions = line.split(",");
+
+                    transitions.add(new Triple(tempTransitions[0],tempTransitions[1],tempTransitions[2]));
                 }
 
                 line=reader.readLine();
@@ -79,8 +81,7 @@ public class FAProgram {
         StringBuilder tempTransitions = new StringBuilder();
         for (var element:
              transitions) {
-            var triple = element.split(",");
-            tempTransitions.append("Delta("+triple[0]+","+triple[1]+")="+triple[2]+"\n");
+            tempTransitions.append("Delta("+element.first+","+element.second+")="+element.third+"\n");
         }
         System.out.print(tempTransitions);
 
