@@ -3,3 +3,21 @@ The initial state has to be the first one in the set of states.
 The set of final states is located on the line which starts with 'F='.
 The transitions are triples delimited by comma.
 The elements of the alphabet are either letters or digits.
+
+
+
+file = states , "\n" , alphabet , "\n" , transitions , finalStates
+
+states = initialState , "," , [{state , ","}] , state;
+initialState = letter , [{letter}];
+state = letter , [{letter}];
+
+finalStates = "F=" , [{state , ","}] , state;
+
+alphabet = [{alphabetElem , ","}] , alphabetElem;
+alphabetElem = digit | letter;
+digit = "0" | "1" | ... | "9";
+letter = "A" | "B" | "C" | ... | "Z" | "a" | "b" | ... | "z";
+
+transitions = {transition , "\n"};
+transition = state , "," , alphabetElem , "," , state;
