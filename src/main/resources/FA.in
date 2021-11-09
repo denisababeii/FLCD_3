@@ -4,4 +4,4 @@ p,a,q
 q,a,q
 q,b,r
 p,b,r
-F=r
+F=r,p

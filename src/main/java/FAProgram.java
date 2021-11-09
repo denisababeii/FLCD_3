@@ -130,6 +130,10 @@ public class FAProgram {
     private boolean checkSequence(String sequence) {
         var current = statesSet.get(0);
 
+        if(sequence.equals("3") && finalStates.contains(statesSet.get(0))) {  // check for empty string, 3 is epsilon
+            return true;
+        }
+
         while(sequence.length()!=0) {
             String sequenceElem = Character.toString(sequence.charAt(0));
             var transition = getTransition(current,sequenceElem);
